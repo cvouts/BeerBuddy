@@ -1,4 +1,5 @@
 <resources>
-    <string name="app_name">SimilarBeers</string>
+    <string name="app_name">Beer Buddy</string>
     <string name="type_a_beer">Type a beer!</string>
+    <string name="created_by">Created by Voutsadakis Christos</string>
 </resources>

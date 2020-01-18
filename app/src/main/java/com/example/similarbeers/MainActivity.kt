@@ -40,19 +40,17 @@ class MainActivity : AppCompatActivity() {
             BeerDatabase.getDatabase(this)!!.beerDao().getStyle(input)
 
         beerStyleLive.observe(this, Observer nullCheck@ { beerStyle ->
-
             if(beerStyle == null) {
                 Toast.makeText(applicationContext, "That beer is not in the database yet :(",
                     Toast.LENGTH_SHORT).show()
                 return@nullCheck
             }
-            
+
             val listLive: LiveData<Array<String>> =
                 BeerDatabase.getDatabase(this)!!.beerDao()
                     .getSimilarBeers(input, beerStyle)
 
             listLive.observe(this, Observer { list ->
-
                 arrayListForAdapter.clear()
                 list.forEach {
                     arrayListForAdapter.add(it)
@@ -67,11 +65,9 @@ class MainActivity : AppCompatActivity() {
             BeerDatabase.getDatabase(this)!!.beerDao().getAllBeers()
 
         list.observe(this, Observer {
-
             var adapter = ArrayAdapter<String>(
                 this, android.R.layout.simple_expandable_list_item_1, it
             )
-
             autocompleteView.setAdapter(adapter)
             autocompleteView.threshold = 1
         })
