@@ -30,13 +30,24 @@
         app:layout_constraintStart_toStartOf="@+id/autocompleteView"
         app:layout_constraintTop_toBottomOf="@+id/autocompleteView" />
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="@string/suggestions"
+        android:textColor="@color/black"
+        android:textStyle="italic"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageButtonView" />
+
     <ListView
         android:id="@+id/resultListView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="200dp"
+        android:layout_marginTop="250dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/imageButtonView" >
+        app:layout_constraintTop_toBottomOf="@id/textView" >
     </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

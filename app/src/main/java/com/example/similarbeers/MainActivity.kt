@@ -1,6 +1,7 @@
 package com.example.similarbeers
 
 import android.content.Context
+import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -22,11 +23,12 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        textView.visibility = View.INVISIBLE
+
         autocompleteFunctionality()
 
-        adapteros = ArrayAdapter(
-            this, android.R.layout.simple_list_item_1, arrayListForAdapter
-        )
+        adapteros = ArrayAdapter(this, R.layout.list_element, arrayListForAdapter)
+
         resultListView.adapter = adapteros
 
         imageButtonView.setOnClickListener {
@@ -41,10 +43,23 @@ class MainActivity : AppCompatActivity() {
 
         beerStyleLive.observe(this, Observer nullCheck@ { beerStyle ->
             if(beerStyle == null) {
-                Toast.makeText(applicationContext, "That beer is not in the database yet :(",
-                    Toast.LENGTH_SHORT).show()
+
+                if(input == "") {
+                    Toast.makeText(applicationContext, "You need to type a beer first!",
+                        Toast.LENGTH_SHORT).show()
+                }
+                else {
+                    Toast.makeText(
+                        applicationContext, "That beer is not in the database yet :(",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+                textView.visibility = View.INVISIBLE
+                arrayListForAdapter.clear()
+                adapteros.notifyDataSetChanged()
                 return@nullCheck
             }
+            textView.visibility = View.VISIBLE
 
             val listLive: LiveData<Array<String>> =
                 BeerDatabase.getDatabase(this)!!.beerDao()
@@ -80,4 +95,6 @@ class MainActivity : AppCompatActivity() {
             imm.hideSoftInputFromWindow(view.windowToken, 0)
         }
     }
+
+
 }

@@ -32,14 +32,14 @@
         android:id="@+id/textView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/progressBar"
-        android:layout_marginTop="0dp"
+        android:layout_marginTop="80dp"
+        android:fontFamily="@font/goblin_one"
         android:gravity="center"
         android:padding="15dp"
         android:text="@string/created_by"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="15dp"
+        android:textSize="10dp"
         android:textStyle="bold" />
 
 </LinearLayout>
