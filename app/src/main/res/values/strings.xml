@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">SimilarBeers</string>
+    <string name="type_a_beer">Type a beer!</string>
 </resources>

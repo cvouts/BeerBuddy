@@ -4,8 +4,10 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_main.*
@@ -25,19 +27,26 @@ class MainActivity : AppCompatActivity() {
         adapteros = ArrayAdapter(
             this, android.R.layout.simple_list_item_1, arrayListForAdapter
         )
-        resultList.adapter = adapteros
+        resultListView.adapter = adapteros
 
-        imageButton.setOnClickListener {
+        imageButtonView.setOnClickListener {
             closeKeyboard()
-            buttonClicked(autocomplete.text.toString())
+            buttonClicked(autocompleteView.text.toString())
         }
     }
 
     private fun buttonClicked(input: String) {
         val beerStyleLive: LiveData<String> =
-            BeerDatabase.getDatabase(this)!!.beerDao().getStyle(input!!)
-        beerStyleLive.observe(this, Observer { beerStyle ->
+            BeerDatabase.getDatabase(this)!!.beerDao().getStyle(input)
 
+        beerStyleLive.observe(this, Observer nullCheck@ { beerStyle ->
+
+            if(beerStyle == null) {
+                Toast.makeText(applicationContext, "That beer is not in the database yet :(",
+                    Toast.LENGTH_SHORT).show()
+                return@nullCheck
+            }
+            
             val listLive: LiveData<Array<String>> =
                 BeerDatabase.getDatabase(this)!!.beerDao()
                     .getSimilarBeers(input, beerStyle)
@@ -63,8 +72,8 @@ class MainActivity : AppCompatActivity() {
                 this, android.R.layout.simple_expandable_list_item_1, it
             )
 
-            autocomplete.setAdapter(adapter)
-            autocomplete.threshold = 1
+            autocompleteView.setAdapter(adapter)
+            autocompleteView.threshold = 1
         })
     }
 
