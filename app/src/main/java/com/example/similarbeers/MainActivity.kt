@@ -1,7 +1,6 @@
 package com.example.similarbeers
 
 import android.content.Context
-import android.graphics.Typeface
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -76,11 +75,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun autocompleteFunctionality() {
-        var list: LiveData<Array<String>> =
+        val list: LiveData<Array<String>> =
             BeerDatabase.getDatabase(this)!!.beerDao().getAllBeers()
 
         list.observe(this, Observer {
-            var adapter = ArrayAdapter<String>(
+            val adapter = ArrayAdapter<String>(
                 this, android.R.layout.simple_expandable_list_item_1, it
             )
             autocompleteView.setAdapter(adapter)
@@ -96,5 +95,32 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
 
+        outState.putStringArrayList("savedList", arrayListForAdapter)
+
+        if(textView.visibility == View.VISIBLE) {
+            outState.putInt("textView", 1)
+        }
+    }
+
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+
+        val restoredArray = savedInstanceState.getStringArrayList("savedList")
+
+        val textViewCheck = savedInstanceState.getInt("textView")
+
+        if (textViewCheck == 1) {
+            textView.visibility = View.VISIBLE
+        }
+
+        arrayListForAdapter.clear()
+        restoredArray?.forEach {
+            arrayListForAdapter.add(it)
+            Log.d("TAG", "in foreach")
+        }
+        adapteros.notifyDataSetChanged()
+    }
 }
