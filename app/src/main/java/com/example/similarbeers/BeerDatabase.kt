@@ -18,7 +18,7 @@ abstract class BeerDatabase : RoomDatabase() {
                 synchronized(BeerDatabase::class) {
                     INSTANCE = Room.databaseBuilder(
                         context.getApplicationContext(),
-                        BeerDatabase::class.java, "mitsos.db" //CHANGE THE NAME HERE AFTER EVERY NEW ENTRY TO THE DATABASE
+                        BeerDatabase::class.java, "version3.db" //CHANGE THE NAME HERE AFTER EVERY NEW ENTRY TO THE DATABASE
                     ).addCallback(object : RoomDatabase.Callback() {
                         override fun onCreate(db: SupportSQLiteDatabase) {
                             super.onCreate(db)

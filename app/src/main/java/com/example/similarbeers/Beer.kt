@@ -22,7 +22,26 @@ data class Beer(
                 Beer("Amstel", "good"),
                 Beer("Alfa", "not_good"),
                 Beer("Kaiser", "good"),
-                Beer("Leffe", "good")
+                Beer("Leffe Radieuse", "good"),
+                Beer("Leffe Blonde", "mediocre"),
+                Beer("Leffe Brune", "idk"),
+                Beer("McFarland", "good"),
+                Beer("Corona", "tbd"),
+                Beer("Mythos", "mediocre"),
+                Beer("Vergina", "not_good"),
+                Beer("Fix", "not_good"),
+                Beer("Mamos", "good"),
+                Beer("Murphy's", "not_good"),
+                Beer("Guiness", "not_good"),
+                Beer("Erdinger", "idk"),
+                Beer("Paulaner", "mediocre"),
+                Beer("Ardwen", "idk"),
+                Beer("Excelsior", "idk"),
+                Beer("Budweiser", "idk"),
+                Beer("Pils", "mediocre"),
+                Beer("Chimay", "good"),
+                Beer("La Trappe", "mediocre")
+
             )
         }
     }
