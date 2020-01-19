@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import kotlinx.android.synthetic.main.activity_main.*
+import pl.droidsonroids.gif.GifDrawable
 import java.util.*
 
 class MainActivity : AppCompatActivity() {
@@ -23,6 +24,13 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val gifView = beerGifView
+        val gifController = gifView.drawable as GifDrawable
+        if(gifController.isRunning) {
+            Log.d("TAG", "running!")
+        }
+        gifController.stop()
+
         textView.visibility = View.INVISIBLE
 
         autocompleteFunctionality()
@@ -31,13 +39,11 @@ class MainActivity : AppCompatActivity() {
         resultListView.adapter = adapteros
 
         imageButtonView.setOnClickListener {
-            closeKeyboard()
             buttonClicked(autocompleteView.text.toString())
         }
 
         autocompleteView.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
             if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
-                closeKeyboard()
                 buttonClicked(autocompleteView.text.toString())
                 return@OnKeyListener true
             }
@@ -67,7 +73,17 @@ class MainActivity : AppCompatActivity() {
                 adapteros.notifyDataSetChanged()
                 return@nullCheck
             }
+            closeKeyboard()
             textView.visibility = View.VISIBLE
+
+            val gifView = beerGifView
+            val gifController = gifView.drawable as GifDrawable
+            gifController.loopCount = 1
+            gifController.reset()
+            gifController.start()
+            if(gifController.isRunning) {
+                Log.d("TAG", "running!")
+            }
 
             val listLive: LiveData<Array<String>> =
                 BeerDatabase.getDatabase(this)!!.beerDao()
@@ -128,7 +144,6 @@ class MainActivity : AppCompatActivity() {
         arrayListForAdapter.clear()
         restoredArray?.forEach {
             arrayListForAdapter.add(it)
-            Log.d("TAG", "in foreach")
         }
         adapteros.notifyDataSetChanged()
     }
