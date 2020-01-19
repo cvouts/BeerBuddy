@@ -19,14 +19,6 @@
         android:layout_marginTop="0dp"
         android:src="@drawable/beer_buddy" />
 
-    <ProgressBar
-        android:id="@+id/progressBar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/imageView"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="0dp"
-        android:indeterminateTint="@color/black"/>
 
     <TextView
         android:id="@+id/textView1"

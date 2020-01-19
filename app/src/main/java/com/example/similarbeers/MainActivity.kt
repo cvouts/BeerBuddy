@@ -4,6 +4,7 @@ import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.KeyEvent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.ArrayAdapter
@@ -27,13 +28,21 @@ class MainActivity : AppCompatActivity() {
         autocompleteFunctionality()
 
         adapteros = ArrayAdapter(this, R.layout.list_element, arrayListForAdapter)
-
         resultListView.adapter = adapteros
 
         imageButtonView.setOnClickListener {
             closeKeyboard()
             buttonClicked(autocompleteView.text.toString())
         }
+
+        autocompleteView.setOnKeyListener(View.OnKeyListener { _, keyCode, event ->
+            if (keyCode == KeyEvent.KEYCODE_ENTER && event.action == KeyEvent.ACTION_UP) {
+                closeKeyboard()
+                buttonClicked(autocompleteView.text.toString())
+                return@OnKeyListener true
+            }
+            false
+        })
     }
 
     private fun buttonClicked(input: String) {

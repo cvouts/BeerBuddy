@@ -9,5 +9,8 @@
     android:paddingStart="?android:attr/listPreferredItemPaddingStart"
     android:paddingEnd="?android:attr/listPreferredItemPaddingEnd"
     android:textAppearance="?android:attr/textAppearanceListItemSmall"
+    android:focusable="true"
+    android:focusableInTouchMode="false"
+    android:clickable="false"
     android:textSize="20sp"
     android:typeface="normal"/>
