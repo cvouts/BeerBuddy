@@ -38,35 +38,44 @@
             app:layout_constraintTop_toTopOf="parent" />
     </LinearLayout>
 
-
-
-    <pl.droidsonroids.gif.GifImageView
-        android:id="@+id/beerGifView"
+    <androidx.core.widget.NestedScrollView
         android:layout_width="wrap_content"
-        android:layout_height="300dp"
-        android:src="@drawable/beer_gif"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/autocompleteView" />
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:text="@string/suggestions"
-        android:textColor="@color/black"
-        android:textStyle="italic"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/beerGifView" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:scrollbarAlwaysDrawVerticalTrack="true"
+            android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/resultListView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/textView"/>
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/beerGifView"
+                android:layout_width="wrap_content"
+                android:layout_height="300dp"
+                android:src="@drawable/beer_gif"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/autocompleteView" />
 
+            <TextView
+                android:id="@+id/textView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:text="@string/suggestions"
+                android:textColor="@color/black"
+                android:textStyle="italic"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/beerGifView" />
+
+            <ListView
+                android:id="@+id/resultListView"
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:layout_marginTop="20dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/textView" />
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
 
 </LinearLayout>
