@@ -1,4 +1,4 @@
-package com.example.similarbeers
+package com.cvoutsadakis.beerbuddy
 
 import androidx.annotation.NonNull
 import androidx.room.ColumnInfo

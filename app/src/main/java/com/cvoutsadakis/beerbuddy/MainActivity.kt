@@ -1,4 +1,4 @@
-package com.example.similarbeers
+package com.cvoutsadakis.beerbuddy
 
 import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
